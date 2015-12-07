@@ -1,0 +1,22 @@
+// out: ../css/maziaj.css, sourcemap: true
+
+body {
+    font-family: 'Lato', sans-serif;
+    background: #fff url("../img/bg-top.jpg") repeat-x 0 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-weight: 900;
+    text-transform: uppercase;
+
+    &.section-header {
+        padding: 20px 0;
+        border-bottom: 2px dashed #ddd;
+    }
+}
+
+@import "components/header.less";
+@import "components/footer.less";
+
+@import "story-list.less";

@@ -1,0 +1,149 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Maziaj</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,300,900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/maziaj.css">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<body data-ng-app="maziaj">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <header>
+        <nav>
+            <a href="index.html">
+                <small>Czym jest</small>
+                <span>Maziaj</span>
+                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+    			</svg>
+            </a>
+            <a href="index.html" class="logotype"></a>
+            <a href="gallery.html" class="current">
+                <small>Galeria</small>
+                <span>historyjek</span>
+                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+    			</svg>
+            </a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center section-header">Galeria historyjek</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+    <section id="story-list" data-ng-controller="StoryListController as stories">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4" data-ng-repeat="story in stories">
+                    <article>
+                        <h3>
+                            #{{story.id}}
+                            <small>rozpoczęta <span>{{story.creationDate}}</span><br />elementów: <span>{{story.framesCount}}</span></small>
+                        </h3>
+                        <div class="story">
+                            <div class="story-item" data-ng-repeat="frameId in story.frames"
+                                 data-ng-class="{loaded : story.detailedFrames[frameId].contents}">
+                                <div class="spinner" data-ng-hide="story.detailedFrames[frameId].contents">
+                                  <div class="double-bounce1"></div>
+                                  <div class="double-bounce2"></div>
+                                  <div class="loading-label">Ładowanie...</div>
+                                </div>
+                                <span class="order">#<span>{{$index+1}}</span></span>
+                                <span class="author" data-ng-show="story.detailedFrames[frameId].author">{{story.detailedFrames[frameId].author}} <span>@ {{story.detailedFrames[frameId].creationDate}}</span></span>
+                                <div class="story-scribble" data-ng-show="story.detailedFrames[frameId].contents && story.detailedFrames[frameId].type === 'CAPTION'">
+                                    {{story.detailedFrames[frameId].contents}}
+                                </div>
+                                <div class="story-doodle" data-ng-show="story.detailedFrames[frameId].contents && story.detailedFrames[frameId].type === 'DRAWING'"
+                                     style="background-image: url('{{story.detailedFrames[frameId].type === 'DRAWING' ? story.detailedFrames[frameId].contents : ''}}');">
+                                </div>
+                            </div>
+                            <!--<div class="story-item">
+                                <div class="spinner">
+                                  <div class="double-bounce1"></div>
+                                  <div class="double-bounce2"></div>
+                                </div>
+                                <span class="order">#<span>2</span></span>
+                                <div class="story-doodle"></div>
+                            </div>-->
+                        </div>
+                        <div class="story-buttons">
+                            <a href="#" class="story-btn story-btn-full">
+                                Zobacz
+                            </a>
+                            <a href="#" class="story-btn story-btn-share">
+                                Szeruj
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <img src="img/logo.png" alt="Maziaj" />
+                    <p class="text-center">Bartosz Gałek<br>Krzysztof Borkowski<br>Jakub Dębski</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+    <!--<script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>-->
+
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/moment-with-locales.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
+    <script>
+        (function(b, o, i, l, e, r) {
+            b.GoogleAnalyticsObject = l;
+            b[l] || (b[l] =
+                function() {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+            b[l].l = +new Date;
+            e = o.createElement(i);
+            r = o.getElementsByTagName(i)[0];
+            e.src = '//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e, r)
+        }(window, document, 'script', 'ga'));
+        ga('create', 'UA-XXXXX-X', 'auto');
+        ga('send', 'pageview');
+    </script> -->
+</body>
+
+</html>

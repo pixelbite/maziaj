@@ -1,0 +1,123 @@
+// main: ../maziaj.less
+
+header {
+    width: 100%;
+    padding: 25px 0;
+    background: rgba(0, 118, 176, 0.8);
+
+    nav {
+        width: 100%;
+        text-align: center;
+        //margin: 0 auto;
+        //width: 970px;
+
+        a {
+            &:not(.logotype) {
+                svg {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    overflow: hidden;
+                    margin: 0;
+                    width: 100%;
+                    height: 20px;
+                    -webkit-transition: stroke-dashoffset 0.3s ease-in-out;
+                    transition: stroke-dashoffset 0.3s ease-in-out;
+                    -webkit-transform: translateY(-90%);
+                    transform: translateY(-90%);
+                    fill: none;
+                    stroke: @maziaj-secondary-blue;
+                    stroke-width: 35px;
+                    stroke-dasharray: 400px;
+                    stroke-dashoffset: 400px;
+                }
+
+                &:hover, &.current {
+                    text-decoration: none;
+
+                    svg {
+                        stroke-dashoffset: 0px;
+                    }
+
+                    span {
+                        color: #fff;
+                    }
+
+                    small {
+                        color: #fff;
+                    }
+                }
+            }
+
+            display: inline-block;
+            min-width: 80px;
+            height: 50px;
+            margin: 0 8px;
+            color: #fff;
+            font-weight: 900;
+            font-size: 13px;
+            line-height: 10px;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+
+            @media(min-width: 768px) {
+                font-size: 16px;
+                line-height: 12px;
+                margin: 0 15px;
+            }
+
+            span {
+                padding: 3px 6px;
+            }
+
+            small {
+                display: block;
+                font-weight: 900;
+                color: rgba(255, 255, 255, 0.5);
+                padding: 3px 6px;
+            }
+
+            &.logotype {
+                background: transparent url('../img/logo_compact.png') no-repeat center center;
+                background-size: contain;
+                width: 80px;
+                margin: 0;
+
+                @media(min-width: 768px) {
+                    background: transparent url('../img/logo_mono.png') no-repeat center center;
+                    background-size: contain;
+                    width: 150px;
+                    margin: 0 15px;
+                }
+            }
+        }
+    }
+}
+
+#hero {
+    width: 100%;
+    background: rgba(0, 118, 176, 0.6);
+
+    #hero-splash {
+        margin: 0 auto;
+        padding: 30px;
+        text-align: center;
+
+        @media(min-width: 768px) {
+            width: 75%;
+        }
+
+        @media(min-width: 992px) {
+            width: 60%;
+        }
+
+        p {
+            color: #fff;
+        }
+
+        img {
+            margin-bottom: 20px;
+        }
+    }
+}
