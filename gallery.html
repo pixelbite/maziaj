@@ -57,50 +57,40 @@
     </div>
     <!-- /container -->
     <section id="story-list" data-ng-controller="StoryListController as stories">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-4" data-ng-repeat="story in stories">
-                    <article>
-                        <h3>
-                            #{{story.id}}
-                            <small>rozpoczęta <span>{{story.creationDate}}</span><br />elementów: <span>{{story.framesCount}}</span></small>
-                        </h3>
-                        <div class="story">
-                            <div class="story-item" data-ng-repeat="frameId in story.frames"
-                                 data-ng-class="{loaded : story.detailedFrames[frameId].contents}">
-                                <div class="spinner" data-ng-hide="story.detailedFrames[frameId].contents">
-                                  <div class="double-bounce1"></div>
-                                  <div class="double-bounce2"></div>
-                                  <div class="loading-label">Ładowanie...</div>
-                                </div>
-                                <span class="order">#<span>{{$index+1}}</span></span>
-                                <span class="author" data-ng-show="story.detailedFrames[frameId].author">{{story.detailedFrames[frameId].author}} <span>@ {{story.detailedFrames[frameId].creationDate}}</span></span>
-                                <div class="story-scribble" data-ng-show="story.detailedFrames[frameId].contents && story.detailedFrames[frameId].type === 'CAPTION'">
-                                    {{story.detailedFrames[frameId].contents}}
-                                </div>
-                                <div class="story-doodle" data-ng-show="story.detailedFrames[frameId].contents && story.detailedFrames[frameId].type === 'DRAWING'"
-                                     style="background-image: url('{{story.detailedFrames[frameId].type === 'DRAWING' ? story.detailedFrames[frameId].contents : ''}}');">
-                                </div>
+        <div class="container stories-grid">
+            <div class="story-wrapper" data-ng-repeat="story in stories">
+                <article>
+                    <h3>
+                        #{{story.displayId}}
+                        <small>rozpoczęta <span>{{story.creationDate}}</span><br />elementów: <span>{{story.framesCount}}</span></small>
+                    </h3>
+                    <div class="story">
+                        <div class="story-item" data-ng-repeat="frameId in story.frames"
+                             data-ng-class="{loaded : story.detailedFrames[frameId].id}">
+                            <div class="spinner" data-ng-hide="story.detailedFrames[frameId].id">
+                              <div class="double-bounce1"></div>
+                              <div class="double-bounce2"></div>
+                              <div class="loading-label">Ładowanie...</div>
                             </div>
-                            <!--<div class="story-item">
-                                <div class="spinner">
-                                  <div class="double-bounce1"></div>
-                                  <div class="double-bounce2"></div>
-                                </div>
-                                <span class="order">#<span>2</span></span>
-                                <div class="story-doodle"></div>
-                            </div>-->
+                            <span class="order">#<span>{{$index+1}}</span></span>
+                            <span class="author" data-ng-show="story.detailedFrames[frameId].author">{{story.detailedFrames[frameId].author}} <span>@ {{story.detailedFrames[frameId].creationDate}}</span></span>
+                            <div class="story-scribble" data-ng-show="story.detailedFrames[frameId].caption && story.detailedFrames[frameId].type === 'CAPTION'">
+                                {{story.detailedFrames[frameId].caption}}
+                            </div>
+                            <div class="story-doodle" data-ng-show="story.detailedFrames[frameId].image && story.detailedFrames[frameId].type === 'DRAWING'"
+                                 style="background-image: url('{{story.detailedFrames[frameId].type === 'DRAWING' ? story.detailedFrames[frameId].image : ''}}');">
+                            </div>
                         </div>
-                        <div class="story-buttons">
-                            <a href="#" class="story-btn story-btn-full">
-                                Zobacz
-                            </a>
-                            <a href="#" class="story-btn story-btn-share">
-                                Szeruj
-                            </a>
-                        </div>
-                    </article>
-                </div>
+                    </div>
+                    <div class="story-buttons">
+                        <a href="#" class="story-btn story-btn-full">
+                            Zobacz
+                        </a>
+                        <a href="#" class="story-btn story-btn-share">
+                            Szeruj
+                        </a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -110,8 +100,8 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <img src="img/logo.png" alt="Maziaj" />
-                    <p class="text-center">Bartosz Gałek<br>Krzysztof Borkowski<br>Jakub Dębski</p>
+                    <img src="img/logo_compact_dark.png" alt="Maziaj" />
+                    <p class="text-center">Bartosz Gałek<br>Krzysztof Borkowski</p>
                 </div>
             </div>
         </div>

@@ -1,7 +1,6 @@
 body {
   font-family: 'Lato', sans-serif;
   background: #fff url("../img/bg-top.jpg") repeat-x 0 0;
-  -webkit-font-smoothing: antialiased;
 }
 h1,
 h2,
@@ -22,7 +21,8 @@ header {
 }
 header nav {
   width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 header nav a {
   display: inline-block;
@@ -88,14 +88,14 @@ header nav a small {
   padding: 3px 6px;
 }
 header nav a.logotype {
-  background: transparent url('../img/logo_compact.png') no-repeat center center;
+  background: transparent url('../img/logo_compact_light.png') no-repeat center center;
   background-size: contain;
   width: 80px;
   margin: 0;
 }
 @media (min-width: 768px) {
   header nav a.logotype {
-    background: transparent url('../img/logo_mono.png') no-repeat center center;
+    background: transparent url('../img/logo_light.png') no-repeat center center;
     background-size: contain;
     width: 150px;
     margin: 0 15px;
@@ -128,7 +128,7 @@ header nav a.logotype {
 }
 footer {
   width: 100%;
-  background: rgba(255, 255, 255, 0.75);
+  background: #fff url("../img/bg-bottom.jpg") repeat-x left top;
   margin-top: 50px;
   padding: 25px 0;
 }
@@ -139,6 +139,27 @@ footer p {
   color: #999;
   font-size: 12px;
   padding-top: 10px;
+}
+#story-list .stories-grid {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+#story-list .stories-grid .story-wrapper {
+  width: 97%;
+  margin: 0 1.5% 20px 1.5%;
+}
+@media (min-width: 768px) {
+  #story-list .stories-grid .story-wrapper {
+    width: 47%;
+    margin: 0 1.5% 20px 1.5%;
+  }
+}
+@media (min-width: 992px) {
+  #story-list .stories-grid .story-wrapper {
+    width: 30%;
+    margin: 0 1.5% 20px 1.5%;
+  }
 }
 #story-list article {
   width: 100%;

@@ -3,6 +3,28 @@
 @import "vars.less";
 
 #story-list {
+
+    .stories-grid {
+        display: flex;
+        flex-flow: row wrap;
+        align-content: flex-start;
+
+        .story-wrapper {
+            width: 97%;
+            margin: 0 1.5% 20px 1.5%;
+
+            @media(min-width: 768px) {
+                width: 47%;
+                margin: 0 1.5% 20px 1.5%;
+            }
+
+            @media(min-width: 992px) {
+                width: 30%;
+                margin: 0 1.5% 20px 1.5%;
+            }
+        }
+    }
+
     article {
         width: 100%;
         padding: 0;
