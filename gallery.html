@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,300,900&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-overrides.css">
     <link rel="stylesheet" href="css/maziaj.css">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -108,8 +108,11 @@
                 </article>
             </div>
         </div>
-        <div class="text-center" data-ng-show="paging.fetchMore" data-ng-click="fetchStories()">
-            <span class="btn btn-lg btn-primary">Chcę wincyj!</span>
+        <div class="text-center" data-ng-show="!paging.initial && paging.fetchMore" data-ng-click="fetchStories()" data-ng-cloak>
+            <span class="btn btn-lg btn-primary" data-ng-class="{disabled: paging.fetching}">
+                <span data-ng-show="!paging.fetching">Chcę wincyj!</span>
+                <span data-ng-show="paging.fetching">Poczekej, wczytuję...</span>
+            </span>
         </div>
     </section>
 

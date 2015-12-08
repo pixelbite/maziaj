@@ -71,15 +71,19 @@
     function StoryListController($scope, $log, $timeout, StoryService) {
         $scope.stories = [];
         $scope.paging = {
+            initial: true,
             fetchMore: true,
-            nextPage: 1
+            fetching: true,
+            nextPage: 0
         };
 
         $scope.fetchStories = function() {
             if ($scope.paging.fetchMore) {
                 $log.info("Fetching more items...");
+                $scope.paging.fetching = true;
                 StoryService.actions.getStories($scope.paging.nextPage).then(
                     function(successPayload) {
+                        $scope.paging.initial = false;
                         $scope.paging.fetchMore = !successPayload.data.last;
                         $scope.paging.nextPage = !successPayload.data.last ? $scope.paging.nextPage + 1 : $scope.paging.nextPage;
                         var newStories = successPayload.data.content;
@@ -111,6 +115,7 @@
                                     function(errorPayload) {}
                                 );
                             });
+                            $scope.paging.fetching = false;
                         })
                     },
                     function(errorPayload) {
