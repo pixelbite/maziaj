@@ -81,8 +81,7 @@
                         newStory = {
                             id: s.id,
                             displayId: s.id.substring(0, s.id.length/2),
-                            creationDate: moment(s.creationDate).fromNow(),
-                            author: s.author,
+                            creationDate: moment(new Number(s.creationDate)).fromNow(),
                             framesCount: s.frames.length,
                             frames: s.frames,
                             detailedFrames: {}
@@ -98,7 +97,7 @@
                                 newStory.detailedFrames[f] = {
                                     id: successPayload.data.author,
                                     author: successPayload.data.author,
-                                    creationDate: moment(successPayload.data.creationDate),
+                                    creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
                                     type: successPayload.data.type,
                                     image: successPayload.data.image || undefined,
                                     caption: successPayload.data.caption || undefined
