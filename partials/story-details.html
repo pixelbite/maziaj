@@ -1,0 +1,53 @@
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center section-header">Historyjka</h1>
+        </div>
+    </div>
+</div>
+
+<section id="story-list" data-ng-controller="StoryDetailsController">
+    <div class="container stories-grid stories-grid-details">
+        <div class="story-wrapper" data-ng-cloak>
+            <article>
+                <h3>
+                    {{story.storyId}}
+                    <small>rozpoczęta <span>{{story.creationDate}}</span><br />
+                        wszystkich ramek: <span>{{story.framesCount}}</span></small>
+                </h3>
+                <div class="story">
+                    <div class="story-item" data-ng-repeat="frameId in story.frames"
+                         data-ng-class="{loaded : story.detailedFrames[frameId].id}">
+                        <div class="spinner" data-ng-hide="story.detailedFrames[frameId].id">
+                          <div class="double-bounce1"></div>
+                          <div class="double-bounce2"></div>
+                          <div class="loading-label">Ładowanie...</div>
+                        </div>
+                        <span class="order"><i class="fa fa-hashtag"></i> <span>{{$index+1}}</span></span>
+                        <span class="author" data-ng-show="story.detailedFrames[frameId].creationDate"><i class="fa fa-calendar"></i> {{story.detailedFrames[frameId].creationDate}}</span>
+                        <div class="story-scribble" data-ng-show="story.detailedFrames[frameId].caption && story.detailedFrames[frameId].type === 'CAPTION'">
+                            {{story.detailedFrames[frameId].caption}}
+                        </div>
+                        <div class="story-doodle" data-ng-show="story.detailedFrames[frameId].image && story.detailedFrames[frameId].type === 'DRAWING'"
+                             style="background-image: url('{{story.detailedFrames[frameId].type === 'DRAWING' ? story.detailedFrames[frameId].image : ''}}');">
+                        </div>
+                    </div>
+                </div>
+                <div class="story-footer">
+                    <div class="story-more" data-ng-show="story.framesCount-story.frames.length > 0">
+                        <span>+ {{story.framesCount-story.frames.length}} ramek</span>
+                    </div>
+                    <div class="story-buttons">
+                        <a href="#/historyjki" class="story-btn story-btn-back">
+                            <i class="fa fa-arrow-left"></i> Nazad
+                        </a>
+                        <a href="#" class="story-btn story-btn-share">
+                            <i class="fa fa-share-alt"></i> Szeruj
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

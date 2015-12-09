@@ -4,14 +4,30 @@
     moment.locale('pl');
 
     angular
-    .module('maziaj', [])
+    .module('maziaj', ['ngRoute'])
     .constant('MAZIAJ_CONFIG', {
         apiConfig: {
             secure: false,
             host: 'api-maziaj.herokuapp.com',
             port: null
         }
-    });
+    }).config(['$routeProvider',
+        function($routeProvider) {
+            $routeProvider.
+            when('/', {
+                templateUrl: 'partials/about.html'
+            }).
+            when('/historyjki', {
+                templateUrl: 'partials/story-list.html'
+            }).
+            when('/historyjki/:storyId', {
+                templateUrl: 'partials/story-details.html'
+            }).
+            otherwise({
+                redirectTo: '/'
+            });
+        }
+    ]);
 
     /* SERVICES */
 
@@ -26,6 +42,7 @@
             data: {},
             actions: {
                 getStories: getStories,
+                getStory: getStory,
                 getFrame: getFrame
             }
         };
@@ -48,6 +65,15 @@
                     page: page ? page : 0,
                     minFrames: minFrames ? minFrames : 5
                 }
+            })
+            .success(function(data, status, headers, config) {})
+            .error(function(data, status, headers, config) {});
+        }
+
+        function getStory(storyId) {
+            return $http({
+                method: 'GET',
+                url: _getApiUrl('/stories/'+storyId)
             })
             .success(function(data, status, headers, config) {})
             .error(function(data, status, headers, config) {});
@@ -94,10 +120,9 @@
                             var frameIndex = 0,
                                 newStory = {
                                     id: s.id,
-                                    displayId: s.id.substring(s.id.length/2, s.id.length),
                                     creationDate: moment(new Number(s.creationDate)).fromNow(),
                                     framesCount: s.frames.length,
-                                    frames: s.frames,
+                                    frames: s.frames.slice(0, s.frames.length > 5 ? 4 : s.frames.length),
                                     detailedFrames: {}
                                 };
 
@@ -107,7 +132,7 @@
                                 StoryService.actions.getFrame(s.id, f).then(
                                     function(successPayload) {
                                         newStory.detailedFrames[f] = {
-                                            id: successPayload.data.author,
+                                            id: successPayload.data.id,
                                             author: successPayload.data.author,
                                             creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
                                             type: successPayload.data.type,
@@ -129,6 +154,47 @@
         }
 
         $scope.fetchStories(); // initial fetch
-    }
+    };
+
+    angular
+    .module('maziaj')
+    .controller('StoryDetailsController', StoryDetailsController);
+
+    StoryDetailsController.$inject = ['$scope', '$log', '$timeout', '$routeParams', 'StoryService'];
+
+    function StoryDetailsController($scope, $log, $timeout, $routeParams, StoryService) {
+        $scope.story = {
+            id: $routeParams.storyId
+        };
+
+        $log.info("Fetching story details...");
+        StoryService.actions.getStory($routeParams.storyId).then(
+            function(successPayload) {
+                $scope.story = {
+                    id: successPayload.data.id,
+                    creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
+                    framesCount: successPayload.data.frames.length,
+                    frames: successPayload.data.frames,
+                    detailedFrames: {}
+                };
+                $scope.story.frames.forEach(function(f) {
+                    StoryService.actions.getFrame($scope.story.id, f).then(
+                        function(successPayload) {
+                            $scope.story.detailedFrames[f] = {
+                                id: successPayload.data.id,
+                                author: successPayload.data.author,
+                                creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
+                                type: successPayload.data.type,
+                                image: successPayload.data.image,
+                                caption: successPayload.data.caption
+                            };
+                        },
+                        function(errorPayload) {}
+                    );
+                });
+            },
+            function(errorPayload) {}
+        );
+    };
 
 })();

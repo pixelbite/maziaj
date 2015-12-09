@@ -12,7 +12,6 @@ h1.section-header,
 h2.section-header,
 h3.section-header {
   padding: 20px 0;
-  border-bottom: 2px dashed #ddd;
 }
 header {
   width: 100%;
@@ -68,6 +67,15 @@ header nav a:not(.logotype) svg {
   stroke-width: 35px;
   stroke-dasharray: 400px;
   stroke-dashoffset: 400px;
+}
+header nav a:not(.logotype):active,
+header nav a:not(.logotype):focus {
+  text-decoration: none;
+  color: #fff;
+}
+header nav a:not(.logotype):active small,
+header nav a:not(.logotype):focus small {
+  color: rgba(255, 255, 255, 0.5);
 }
 header nav a:not(.logotype):hover,
 header nav a:not(.logotype).current {
@@ -175,10 +183,47 @@ footer p {
     margin: 0 1.5% 20px 1.5%;
   }
 }
+#story-list .stories-grid.stories-grid-details {
+  display: block;
+}
+#story-list .stories-grid.stories-grid-details .story-wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  #story-list .stories-grid.stories-grid-details .story-wrapper {
+    width: 575px;
+  }
+}
+#story-list .stories-grid.stories-grid-details .story-wrapper .story .story-item {
+  width: 90%;
+  margin: 0 auto 15px auto;
+}
+#story-list .stories-grid.stories-grid-details .story-wrapper .story .story-item .story-scribble {
+  width: 100%;
+  margin: 0;
+}
+#story-list .stories-grid.stories-grid-details .story-wrapper .story .story-item .story-doodle {
+  width: 100%;
+  height: 210px;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  #story-list .stories-grid.stories-grid-details .story-wrapper .story .story-item .story-scribble {
+    width: 500px;
+    margin: 0 auto;
+  }
+  #story-list .stories-grid.stories-grid-details .story-wrapper .story .story-item .story-doodle {
+    margin: 0 auto;
+    width: 500px;
+    height: 300px;
+  }
+}
 #story-list article {
   width: 100%;
   padding: 0;
   margin-bottom: 10px;
+  border-top: 2px dashed #ddd;
   /*&:nth-child(odd)  {
             background: rgba(0, 118, 176, 0.8);
 
@@ -219,38 +264,71 @@ footer p {
 #story-list article h3 small span {
   color: #a31b20;
 }
-#story-list article .story-buttons {
+#story-list article .story-footer {
   padding: 15px;
   text-align: center;
   background: #e8e2dc;
 }
-#story-list article .story-buttons .story-btn {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+#story-list article .story-footer .story-more {
+  border-bottom: 2px dashed #ccc;
+  line-height: 0;
+  margin: 10px 0 20px 0;
+}
+#story-list article .story-footer .story-more span {
+  background: #e8e2dc;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 0 7px;
+}
+#story-list article .story-footer .story-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+#story-list article .story-footer .story-buttons .story-btn {
+  display: block;
+  width: 100%;
+  height: 50px;
   margin: 0 5px;
-  background: #000;
+  background: #111;
   color: #fff;
   text-align: center;
   font-weight: 900;
   text-transform: uppercase;
   font-size: 12px;
-  line-height: 80px;
-  border-radius: 100%;
-}
-#story-list article .story-buttons .story-btn:hover {
-  text-decoration: none;
-  transform: rotate(360deg);
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
+  line-height: 50px;
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -o-transition: all 0.3s;
 }
-#story-list article .story-buttons .story-btn.story-btn-full {
+#story-list article .story-footer .story-buttons .story-btn:hover {
+  background: #373737;
+  text-decoration: none;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+#story-list article .story-footer .story-buttons .story-btn:active,
+#story-list article .story-footer .story-buttons .story-btn:focus {
+  text-decoration: none;
+}
+#story-list article .story-footer .story-buttons .story-btn i {
+  margin-right: 3px;
+}
+#story-list article .story-footer .story-buttons .story-btn.story-btn-full {
   background: #a31b20;
+}
+#story-list article .story-footer .story-buttons .story-btn.story-btn-full:hover {
+  background: #dc2e35;
+}
+#story-list article .story-footer .story-buttons .story-btn.story-btn-back {
+  background: #1982b6;
+}
+#story-list article .story-footer .story-buttons .story-btn.story-btn-back:hover {
+  background: #38abe4;
 }
 #story-list article .story {
   padding: 15px;

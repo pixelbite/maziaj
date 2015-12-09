@@ -18,62 +18,53 @@
 
     <link rel="stylesheet" href="static/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/bootstrap-overrides.css">
+    <link rel="stylesheet" href="static/node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/css/maziaj.css">
 
     <script src="static/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="static/node_modules/angular/angular.min.js"></script>
 </head>
 
-<body>
+<body data-ng-app="maziaj">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <header>
-        <nav>
-            <a href="index.html" class="current">
-                <small>Czym jest</small>
-                <span>Maziaj</span>
-                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
-    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
-    			</svg>
-            </a>
-            <a href="http://maziaj.pl/" class="hidden-xs">
-                <small>Chcę</small>
-                <span>Maziać</span>
-                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
-    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
-    			</svg>
-            </a>
-            <a href="index.html" class="logotype"></a>
-            <a href="gallery.html">
-                <small>Galeria</small>
-                <span>historyjek</span>
-                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
-    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
-    			</svg>
-            </a>
-            <a href="https://www.facebook.com/Maziajpl-252588921456257/" class="hidden-xs">
-                <small>Maziajowy</small>
-                <span>Fejsbuk</span>
-                <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
-    				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
-    			</svg>
-            </a>
-        </nav>
-    </header>
+        <header>
+            <nav>
+                <a href="#/">
+                    <small>Czym jest</small>
+                    <span>Maziaj</span>
+                    <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+        				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+        			</svg>
+                </a>
+                <a href="http://maziaj.pl/" class="hidden-xs">
+                    <small>Chcę</small>
+                    <span>Maziać</span>
+                    <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+        				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+        			</svg>
+                </a>
+                <a href="#/" class="logotype"></a>
+                <a href="#/historyjki">
+                    <small>Galeria</small>
+                    <span>historyjek</span>
+                    <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+        				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+        			</svg>
+                </a>
+                <a href="https://www.facebook.com/Maziajpl-252588921456257/" class="hidden-xs">
+                    <small>Maziajowy</small>
+                    <span>Fejsbuk</span>
+                    <svg viewBox="0 0 400 20" xmlns="http://www.w3.org/2000/svg">
+        				<path id="svg_line" d="m 1.986,8.91 c 55.429038,4.081 111.58111,5.822 167.11781,2.867 22.70911,-1.208 45.39828,-0.601 68.126,-0.778 28.38173,-0.223 56.76079,-1.024 85.13721,-1.33 24.17379,-0.261 48.42731,0.571 72.58115,0.571"></path>
+        			</svg>
+                </a>
+            </nav>
+        </header>
 
-    <div id="hero">
-        <div id="hero-splash">
-            <p class="lead">
-                W Maziaj czasem musisz opisać jakiś rysunek, a czasem narysować coś do podanego opisu. Osoba rysująca widzi tylko ostatni opis, a opisująca tylko ostatni rysunek.
-            </p>
-            <p>
-                Takie kalambury, w których wszyscy odpowiadają źle i tworzy się z tych rysunków i opisów coraz większy sznur niejasności. I to nic nie szkodzi. Tak jest śmieszniej. Jak nadal nie łapiesz zasad, po prostu zagraj. To na serio proste.
-            </p>
-            <a href="#" class="btn btn-lg btn-primary" style="margin-bottom: 5px;">Graj!</a><br>
-            <a href="gallery.html" class="btn btn-md btn-info">Przeglądaj historyjki</a>
-        </div>
-    </div>
+    <div data-ng-view></div>
 
     <footer>
         <div class="container">
@@ -89,6 +80,9 @@
 
     <script src="static/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script src="static/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="static/js/main.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
