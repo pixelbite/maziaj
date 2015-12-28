@@ -43,7 +43,8 @@
             actions: {
                 getStories: getStories,
                 getStory: getStory,
-                getFrame: getFrame
+                getFrame: getFrame,
+                likeStory: likeStory
             }
         };
 
@@ -87,6 +88,15 @@
             .success(function(data, status, headers, config) {})
             .error(function(data, status, headers, config) {});
         }
+
+        function likeStory(storyId) {
+            return $http({
+                method: 'PUT',
+                url: _getApiUrl('/stories/'+storyId+'/like')
+            })
+            .success(function(data, status, headers, config) {})
+            .error(function(data, status, headers, config) {});
+        }
     }
 
     /* CONTROLLERS */
@@ -122,8 +132,9 @@
                                     id: s.id,
                                     creationDate: moment(new Number(s.creationDate)).fromNow(),
                                     framesCount: s.frames.length,
-                                    frames: s.frames.slice(0, s.frames.length > 5 ? 4 : s.frames.length),
-                                    detailedFrames: {}
+                                    frames: s.frames.slice(0, s.frames.length > 5 ? 5 : s.frames.length),
+                                    detailedFrames: {},
+                                    likes: s.likes
                                 };
 
                             // add story to list and start fetching frames
@@ -166,6 +177,10 @@
         $scope.story = {
             id: $routeParams.storyId
         };
+        $scope.like = {
+            liked: false,
+            requested: false
+        }
 
         $log.info("Fetching story details...");
         StoryService.actions.getStory($routeParams.storyId).then(
@@ -175,8 +190,10 @@
                     creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
                     framesCount: successPayload.data.frames.length,
                     frames: successPayload.data.frames,
+                    likes: successPayload.data.likes,
                     detailedFrames: {}
                 };
+                $log.info("Fetched.");
                 $scope.story.frames.forEach(function(f) {
                     StoryService.actions.getFrame($scope.story.id, f).then(
                         function(successPayload) {
@@ -195,6 +212,20 @@
             },
             function(errorPayload) {}
         );
+
+        $scope.likeThisStory = function() {
+            if (!$scope.like.requested && !$scope.like.liked) {
+                $scope.like.requested = true;
+                StoryService.actions.likeStory($scope.story.id).then(
+                    function(successPayload) {
+                        $log.info(successPayload);
+                        $scope.like.liked = true;
+                        $scope.story.likes = successPayload.data;
+                    },
+                    function(errorPayload) {}
+                );
+            }
+        }
     };
 
 })();

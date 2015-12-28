@@ -162,6 +162,99 @@ footer p {
   font-size: 12px;
   padding-top: 10px;
 }
+#story-list {
+  /*.like-story {
+        text-align: center;
+        margin-top: 10px;
+
+        .fa-heart {
+            color: @maziaj-secondary-red;
+            font-size: 35px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            position: relative;
+            opacity: 0.3;
+            transition: 0.3s all;
+            -webkit-transition: 0.3s all;
+            overflow: hidden;
+
+            .fa {
+                color: #fff;
+                font-size: 14px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -8px;
+                margin-left: -6px;
+                opacity: 0;
+                transition: 0.3s all;
+                -webkit-transition: 0.3s all;
+
+                &.fa-cog {
+                    color: rgba(0, 0, 0, 0.5);
+                }
+            }
+
+            .likes-counter {
+                position: absolute;
+                width: 100%;
+                font-size: 11px;
+                color: #fff;
+                height: 100%;
+                top: 100%;
+                left: 0;
+                line-height: 32px;
+                text-align: center;
+                transition: 0.3s all;
+                -webkit-transition: 0.3s all;
+            }
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+                .fa { opacity: 1; }
+            }
+        }
+
+        &.requested {
+            .fa-heart {
+                opacity: 1;
+
+                .fa { opacity: 1; }
+            }
+        }
+
+        &.liked {
+            .fa-heart {
+                opacity: 1;
+
+                .fa {
+                    opacity: 0;
+                    top: -100%;
+                    transition: 0.3s all;
+                    transition-timing-function: ease-in;
+                    -webkit-transition: 0.3s all;
+                    -webkit-transition-timing-function: ease-in;
+                }
+
+                .likes-counter {
+                    top: 0;
+                    transition: 0.3s all;
+                    transition-delay: 0.3s;
+                    transition-timing-function: ease-in;
+                    -webkit-transition: 0.3s all;
+                    -webkit-transition-delay: 0.3s;
+                    -webkit-transition-timing-function: ease-in;
+                }
+            }
+        }
+
+        &:hover {
+            cursor: default;
+        }
+    }*/
+}
 #story-list .stories-grid {
   display: flex;
   flex-flow: row wrap;
@@ -251,7 +344,6 @@ footer p {
 #story-list article h3 {
   font-weight: 900;
   margin: 0;
-  text-align: center;
   padding: 20px 10px;
   color: #1982b6;
 }
@@ -260,9 +352,25 @@ footer p {
   display: block;
   font-weight: 900;
   font-size: 55%;
+  float: left;
 }
 #story-list article h3 small span {
   color: #a31b20;
+}
+#story-list article h3 small.likes {
+  color: #a31b20;
+  float: right;
+  position: relative;
+  top: 7px;
+}
+#story-list article h3 small.likes .fa-heart {
+  margin-left: 1px;
+}
+#story-list article h3 small.likes .like-action {
+  color: #aaa;
+}
+#story-list article h3 small.likes.liked .like-action {
+  display: none;
 }
 #story-list article .story-footer {
   padding: 15px;
@@ -333,41 +441,41 @@ footer p {
 #story-list article .story {
   padding: 15px;
   position: relative;
-  background: #111;
+  background: transparent;
   border-top: 4px solid #1982b6;
 }
 #story-list article .story .story-item {
   position: relative;
   min-height: 100px;
-  background: #0b0b0b;
-  border: 1px dashed #222;
+  background: #eee;
+  border: 1px dashed #aaa;
   margin-bottom: 15px;
   transition: 0.3s all;
   -webkit-transition: 0.3s all;
 }
 #story-list article .story .story-item.loaded {
-  background: #111;
-  border: 1px solid #111;
-}
-#story-list article .story .story-item.loaded:hover {
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  transition: 0.3s all;
-  -webkit-transition: 0.3s all;
-}
-#story-list article .story .story-item.loaded:hover .order,
-#story-list article .story .story-item.loaded:hover .author {
-  opacity: 0;
-  transition: 0.3s all;
-  -webkit-transition: 0.3s all;
-}
-#story-list article .story .story-item.loaded:hover .story-scribble,
-#story-list article .story .story-item.loaded:hover .story-doodle {
-  cursor: default;
-  transform: rotate(0);
-  -webkit-transform: rotate(0);
-  transition: 0.3s all;
-  -webkit-transition: 0.3s all;
+  background: transparent;
+  border: 1px solid transparent;
+  /*&:hover {
+                        transform: scale(1.05);
+                        -webkit-transform: scale(1.05);
+                        transition: 0.3s all;
+                        -webkit-transition: 0.3s all;
+
+                        .order, .author {
+                            opacity: 0;
+                            transition: 0.3s all;
+                            -webkit-transition: 0.3s all;
+                        }
+
+                        .story-scribble, .story-doodle {
+                            cursor: default;
+                            transform: rotate(0);
+                            -webkit-transform: rotate(0);
+                            transition: 0.3s all;
+                            -webkit-transition: 0.3s all;
+                        }
+                    }*/
 }
 #story-list article .story .story-item .order,
 #story-list article .story .story-item .author {
@@ -465,6 +573,7 @@ footer p {
   width: 100%;
   height: 190px;
   background-color: #fff;
+  border: 1px solid #ddd;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -476,6 +585,7 @@ footer p {
 }
 #story-list article .story .story-scribble {
   background: #fff url("../img/paper.png") repeat-x 0 0;
+  border: 1px solid #ddd;
   text-transform: uppercase;
   min-height: 100px;
   color: #222;

@@ -12,9 +12,12 @@
         <div class="story-wrapper" data-ng-cloak>
             <article>
                 <h3>
-                    {{story.storyId}}
                     <small>rozpoczęta <span>{{story.creationDate}}</span><br />
-                        wszystkich ramek: <span>{{story.framesCount}}</span></small>
+                    wszystkich ramek: <span>{{story.framesCount}}</span></small>
+                    <small class="likes" ng-click="likeThisStory()" ng-class="{liked: like.liked, requested: like.requested}">
+                        {{story.likes}} <i class="fa fa-heart"></i> <i class="like-action fa" ng-class="like.requested ? 'fa-cog fa-spin' : 'fa-plus'"></i>
+                    </small>
+                    <div class="clearfix"></div>
                 </h3>
                 <div class="story">
                     <div class="story-item" data-ng-repeat="frameId in story.frames"
