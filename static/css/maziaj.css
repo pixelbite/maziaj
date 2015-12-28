@@ -362,15 +362,46 @@ footer p {
   float: right;
   position: relative;
   top: 7px;
+  width: 40%;
+  text-align: right;
 }
 #story-list article h3 small.likes .fa-heart {
   margin-left: 1px;
 }
+#story-list article h3 small.likes .like-it {
+  opacity: 0;
+}
+#story-list article h3 small.likes:hover {
+  cursor: pointer;
+}
+#story-list article h3 small.likes:hover .count {
+  color: #999;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
+#story-list article h3 small.likes:hover .like-it {
+  opacity: 1;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+}
 #story-list article h3 small.likes .like-action {
   color: #aaa;
 }
+#story-list article h3 small.likes.liked {
+  cursor: default;
+}
 #story-list article h3 small.likes.liked .like-action {
   display: none;
+}
+#story-list article h3 small.likes.liked:hover .count {
+  color: #a31b20;
+}
+#story-list article h3 small.likes.liked:hover .like-it {
+  opacity: 0;
 }
 #story-list article .story-footer {
   padding: 15px;

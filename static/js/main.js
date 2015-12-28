@@ -15,12 +15,12 @@
         function($routeProvider) {
             $routeProvider.
             when('/', {
-                templateUrl: 'partials/about.html'
-            }).
-            when('/historyjki', {
                 templateUrl: 'partials/story-list.html'
             }).
-            when('/historyjki/:storyId', {
+            when('/co-to', {
+                templateUrl: 'partials/about.html'
+            }).
+            when('/historyjka/:storyId', {
                 templateUrl: 'partials/story-details.html'
             }).
             otherwise({

@@ -14,7 +14,7 @@
                     <small>rozpoczęta <span>{{story.creationDate}}</span><br />
                     wszystkich ramek: <span>{{story.framesCount}}</span></small>
                     <small class="likes" ng-click="likeThisStory()" ng-class="{liked: like.liked, requested: like.requested}">
-                        {{story.likes}} <i class="fa fa-heart"></i> <i class="like-action fa" ng-class="like.requested ? 'fa-cog fa-spin' : 'fa-plus'"></i>
+                        <span class="like-it">Fajne!</span> <span class="count">{{story.likes}}</span> <i class="fa fa-heart"></i> <i ng-show="like.requested && !like.liked" class="like-action fa fa-cog fa-spin"></i>
                     </small>
                     <div class="clearfix"></div>
                 </h3>

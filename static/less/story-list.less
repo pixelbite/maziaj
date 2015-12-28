@@ -189,9 +189,32 @@
                     float: right;
                     position: relative;
                     top: 7px;
+                    width: 40%;
+                    text-align: right;
 
                     .fa-heart {
                         margin-left: 1px;
+                    }
+
+                    .like-it { opacity: 0; }
+
+                    &:hover {
+                        cursor: pointer;
+
+                        .count {
+                            color: #999;
+                            transition: all 0.3s;
+                            -webkit-transition: all 0.3s;
+                            -moz-transition: all 0.3s;
+                            -o-transition: all 0.3s;
+                        }
+                        .like-it {
+                            opacity: 1;
+                            transition: all 0.3s;
+                            -webkit-transition: all 0.3s;
+                            -moz-transition: all 0.3s;
+                            -o-transition: all 0.3s;
+                        }
                     }
 
                     .like-action {
@@ -199,7 +222,14 @@
                     }
 
                     &.liked {
+                        cursor: default;
+                        
                         .like-action { display: none; }
+
+                        &:hover {
+                            .count { color: @maziaj-secondary-red; }
+                            .like-it { opacity: 0; }
+                        }
                     }
                 }
             }
