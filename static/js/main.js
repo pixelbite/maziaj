@@ -126,26 +126,26 @@
                         $scope.paging.fetchMore = !successPayload.data.last;
                         $scope.paging.nextPage = !successPayload.data.last ? $scope.paging.nextPage + 1 : $scope.paging.nextPage;
                         var newStories = successPayload.data.content;
-                        newStories.forEach(function(s) {
+                        newStories.forEach(function(story) {
                             var frameIndex = 0,
                                 newStory = {
-                                    id: s.id,
-                                    creationDate: moment(new Number(s.creationDate)).fromNow(),
-                                    framesCount: s.frames.length,
-                                    frames: s.frames.slice(0, s.frames.length > 5 ? 5 : s.frames.length),
+                                    id: story.id,
+                                    creationDate: moment(story.creationDate).fromNow(),
+                                    framesCount: story.frames.length,
+                                    frames: story.frames.slice(0, story.frames.length > 5 ? 5 : story.frames.length),
                                     detailedFrames: {},
-                                    likes: s.likes
+                                    likes: story.likes
                                 };
 
                             // add story to list and start fetching frames
                             $scope.stories.push(newStory);
                             newStory.frames.forEach(function(f) {
-                                StoryService.actions.getFrame(s.id, f).then(
+                                StoryService.actions.getFrame(story.id, f).then(
                                     function(successPayload) {
                                         newStory.detailedFrames[f] = {
                                             id: successPayload.data.id,
                                             author: successPayload.data.author,
-                                            creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
+                                            creationDate: moment(successPayload.data.creationDate).fromNow(),
                                             type: successPayload.data.type,
                                             image: successPayload.data.image,
                                             caption: successPayload.data.caption
@@ -187,7 +187,7 @@
             function(successPayload) {
                 $scope.story = {
                     id: successPayload.data.id,
-                    creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
+                    creationDate: moment(successPayload.data.creationDate).fromNow(),
                     framesCount: successPayload.data.frames.length,
                     frames: successPayload.data.frames,
                     likes: successPayload.data.likes,
@@ -200,7 +200,7 @@
                             $scope.story.detailedFrames[f] = {
                                 id: successPayload.data.id,
                                 author: successPayload.data.author,
-                                creationDate: moment(new Number(successPayload.data.creationDate)).fromNow(),
+                                creationDate: moment(successPayload.data.creationDate).fromNow(),
                                 type: successPayload.data.type,
                                 image: successPayload.data.image,
                                 caption: successPayload.data.caption
