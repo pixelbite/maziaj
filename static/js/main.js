@@ -194,6 +194,7 @@
                     detailedFrames: {}
                 };
                 $log.info("Fetched.");
+                $('h3.head-affix').affix({offset: 15});
                 $scope.story.frames.forEach(function(f) {
                     StoryService.actions.getFrame($scope.story.id, f).then(
                         function(successPayload) {

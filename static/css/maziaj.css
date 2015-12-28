@@ -403,6 +403,32 @@ footer p {
 #story-list article h3 small.likes.liked:hover .like-it {
   opacity: 0;
 }
+#story-list article h3.affix {
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 15px 20px;
+}
+#story-list article h3.affix small {
+  color: #eee;
+}
+#story-list article h3.affix small span {
+  color: #e0444a;
+}
+#story-list article h3.affix small.likes {
+  color: #e0444a;
+}
+#story-list article h3.affix small.likes:hover .count {
+  color: #666;
+}
+#story-list article h3.affix small.likes .like-action {
+  color: #666;
+}
+#story-list article h3.affix small.likes.liked:hover .count {
+  color: #e0444a;
+}
 #story-list article .story-footer {
   padding: 15px;
   text-align: center;

@@ -223,12 +223,46 @@
 
                     &.liked {
                         cursor: default;
-                        
+
                         .like-action { display: none; }
 
                         &:hover {
                             .count { color: @maziaj-secondary-red; }
                             .like-it { opacity: 0; }
+                        }
+                    }
+                }
+            }
+
+            &.affix {
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 15px 20px;
+
+                small {
+                    color: #eee;
+
+                    span {
+                        color: lighten(@maziaj-secondary-red, 20%);
+                    }
+
+                    &.likes {
+                        color: lighten(@maziaj-secondary-red, 20%);
+                        &:hover {
+                            .count {
+                                color: #666;
+                            }
+                        }
+                        .like-action {
+                            color: #666;
+                        }
+                        &.liked {
+                            &:hover {
+                                .count { color: lighten(@maziaj-secondary-red, 20%); }
+                            }
                         }
                     }
                 }
