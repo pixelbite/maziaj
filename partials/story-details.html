@@ -16,7 +16,7 @@
                     <small class="likes" ng-click="likeThisStory()" ng-class="{liked: like.liked, requested: like.requested}">
                         <span class="like-it">Fajne!</span> <span class="count">{{story.likes}}</span> <i class="fa fa-heart"></i> <i ng-show="like.requested && !like.liked" class="like-action fa fa-cog fa-spin"></i>
                     </small>
-                    <div class="clearfix"></div>
+                    <span class="clearfix"></span>
                 </h3>
                 <div class="story">
                     <div class="story-item" data-ng-repeat="frameId in story.frames"

@@ -4,15 +4,15 @@
     moment.locale('pl');
 
     angular
-    .module('maziaj', ['ngRoute'])
-    .constant('MAZIAJ_CONFIG', {
-        apiConfig: {
-            secure: false,
-            host: 'api-maziaj.herokuapp.com',
-            port: null
-        }
-    }).config(['$routeProvider',
-        function($routeProvider) {
+        .module('maziaj', ['ngRoute'])
+        .constant('MAZIAJ_CONFIG', {
+            apiConfig: {
+                secure: false,
+                host: 'api-maziaj.herokuapp.com',
+                port: null
+            }
+        }).config(['$routeProvider',
+        function ($routeProvider) {
             $routeProvider.
             when('/', {
                 templateUrl: 'partials/story-list.html'
@@ -32,13 +32,13 @@
     /* SERVICES */
 
     angular
-    .module('maziaj')
-    .factory('StoryService', StoryService);
+        .module('maziaj')
+        .factory('StoryService', StoryService);
 
-    StoryService.$inject = ['$http', '$log', '$timeout', 'MAZIAJ_CONFIG'];
+    StoryService.$inject = ['$http', 'MAZIAJ_CONFIG'];
 
-    function StoryService($http, $log, $timeout, MAZIAJ_CONFIG) {
-        var StoryService = {
+    function StoryService($http, MAZIAJ_CONFIG) {
+        return {
             data: {},
             actions: {
                 getStories: getStories,
@@ -47,8 +47,6 @@
                 likeStory: likeStory
             }
         };
-
-        return StoryService;
 
         function _getApiUrl(endpoint) {
             return (MAZIAJ_CONFIG.apiConfig.secure ? 'https' : 'http') + "://" + MAZIAJ_CONFIG.apiConfig.host + endpoint;
@@ -67,47 +65,55 @@
                     minFrames: minFrames ? minFrames : 5
                 }
             })
-            .success(function(data, status, headers, config) {})
-            .error(function(data, status, headers, config) {});
+                .success(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
+                });
         }
 
         function getStory(storyId) {
             return $http({
                 method: 'GET',
-                url: _getApiUrl('/stories/'+storyId)
+                url: _getApiUrl('/stories/' + storyId)
             })
-            .success(function(data, status, headers, config) {})
-            .error(function(data, status, headers, config) {});
+                .success(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
+                });
         }
 
         function getFrame(storyId, frameId) {
             return $http({
                 method: 'GET',
-                url: _getApiUrl('/stories/'+storyId+'/frame/'+frameId)
+                url: _getApiUrl('/stories/' + storyId + '/frame/' + frameId)
             })
-            .success(function(data, status, headers, config) {})
-            .error(function(data, status, headers, config) {});
+                .success(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
+                });
         }
 
         function likeStory(storyId) {
             return $http({
                 method: 'PUT',
-                url: _getApiUrl('/stories/'+storyId+'/like')
+                url: _getApiUrl('/stories/' + storyId + '/like')
             })
-            .success(function(data, status, headers, config) {})
-            .error(function(data, status, headers, config) {});
+                .success(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
+                });
         }
     }
 
     /* CONTROLLERS */
 
     angular
-    .module('maziaj')
-    .controller('StoryListController', StoryListController);
+        .module('maziaj')
+        .controller('StoryListController', StoryListController);
 
-    StoryListController.$inject = ['$scope', '$log', '$timeout', 'StoryService'];
+    StoryListController.$inject = ['$scope', '$log', 'StoryService'];
 
-    function StoryListController($scope, $log, $timeout, StoryService) {
+    function StoryListController($scope, $log, StoryService) {
         $scope.stories = [];
         $scope.paging = {
             initial: true,
@@ -116,32 +122,31 @@
             nextPage: 0
         };
 
-        $scope.fetchStories = function() {
+        $scope.fetchStories = function () {
             if ($scope.paging.fetchMore) {
                 $log.info("Fetching more items...");
                 $scope.paging.fetching = true;
                 StoryService.actions.getStories($scope.paging.nextPage).then(
-                    function(successPayload) {
+                    function (successPayload) {
                         $scope.paging.initial = false;
                         $scope.paging.fetchMore = !successPayload.data.last;
                         $scope.paging.nextPage = !successPayload.data.last ? $scope.paging.nextPage + 1 : $scope.paging.nextPage;
                         var newStories = successPayload.data.content;
-                        newStories.forEach(function(story) {
-                            var frameIndex = 0,
-                                newStory = {
-                                    id: story.id,
-                                    creationDate: moment(story.creationDate).fromNow(),
-                                    framesCount: story.frames.length,
-                                    frames: story.frames.slice(0, story.frames.length > 5 ? 5 : story.frames.length),
-                                    detailedFrames: {},
-                                    likes: story.likes
-                                };
+                        newStories.forEach(function (story) {
+                            var newStory = {
+                                id: story.id,
+                                creationDate: moment(story.creationDate).fromNow(),
+                                framesCount: story.frames.length,
+                                frames: story.frames.slice(0, story.frames.length > 5 ? 5 : story.frames.length),
+                                detailedFrames: {},
+                                likes: story.likes
+                            };
 
                             // add story to list and start fetching frames
                             $scope.stories.push(newStory);
-                            newStory.frames.forEach(function(f) {
+                            newStory.frames.forEach(function (f) {
                                 StoryService.actions.getFrame(story.id, f).then(
-                                    function(successPayload) {
+                                    function (successPayload) {
                                         newStory.detailedFrames[f] = {
                                             id: successPayload.data.id,
                                             author: successPayload.data.author,
@@ -151,40 +156,41 @@
                                             caption: successPayload.data.caption
                                         };
                                     },
-                                    function(errorPayload) {}
+                                    function (errorPayload) {
+                                    }
                                 );
                             });
                             $scope.paging.fetching = false;
                         })
                     },
-                    function(errorPayload) {
+                    function (errorPayload) {
                         $log.error(errorPayload);
                     }
                 );
             }
-        }
+        };
 
         $scope.fetchStories(); // initial fetch
-    };
+    }
 
     angular
-    .module('maziaj')
-    .controller('StoryDetailsController', StoryDetailsController);
+        .module('maziaj')
+        .controller('StoryDetailsController', StoryDetailsController);
 
-    StoryDetailsController.$inject = ['$scope', '$log', '$timeout', '$routeParams', 'StoryService'];
+    StoryDetailsController.$inject = ['$scope', '$log', '$routeParams', 'StoryService'];
 
-    function StoryDetailsController($scope, $log, $timeout, $routeParams, StoryService) {
+    function StoryDetailsController($scope, $log, $routeParams, StoryService) {
         $scope.story = {
             id: $routeParams.storyId
         };
         $scope.like = {
             liked: false,
             requested: false
-        }
+        };
 
         $log.info("Fetching story details...");
         StoryService.actions.getStory($routeParams.storyId).then(
-            function(successPayload) {
+            function (successPayload) {
                 $scope.story = {
                     id: successPayload.data.id,
                     creationDate: moment(successPayload.data.creationDate).fromNow(),
@@ -195,9 +201,9 @@
                 };
                 $log.info("Fetched.");
                 $('h3.head-affix').affix({offset: 15});
-                $scope.story.frames.forEach(function(f) {
+                $scope.story.frames.forEach(function (f) {
                     StoryService.actions.getFrame($scope.story.id, f).then(
-                        function(successPayload) {
+                        function (successPayload) {
                             $scope.story.detailedFrames[f] = {
                                 id: successPayload.data.id,
                                 author: successPayload.data.author,
@@ -207,26 +213,29 @@
                                 caption: successPayload.data.caption
                             };
                         },
-                        function(errorPayload) {}
+                        function (errorPayload) {
+                        }
                     );
                 });
             },
-            function(errorPayload) {}
+            function (errorPayload) {
+            }
         );
 
-        $scope.likeThisStory = function() {
+        $scope.likeThisStory = function () {
             if (!$scope.like.requested && !$scope.like.liked) {
                 $scope.like.requested = true;
                 StoryService.actions.likeStory($scope.story.id).then(
-                    function(successPayload) {
+                    function (successPayload) {
                         $log.info(successPayload);
                         $scope.like.liked = true;
                         $scope.story.likes = successPayload.data;
                     },
-                    function(errorPayload) {}
+                    function (errorPayload) {
+                    }
                 );
             }
         }
-    };
+    }
 
 })();
