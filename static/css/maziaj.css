@@ -447,6 +447,9 @@ footer p {
   text-transform: uppercase;
   padding: 0 7px;
 }
+#story-list article .story-footer .fb-share-button {
+  margin-top: 10px;
+}
 #story-list article .story-footer .story-buttons {
   display: flex;
   justify-content: space-around;
