@@ -62,6 +62,7 @@
                 url: _getApiUrl('/stories'),
                 params: {
                     page: page ? page : 0,
+                    sort: 'creationDate,desc',
                     minFrames: minFrames ? minFrames : 5
                 }
             })
