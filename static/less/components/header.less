@@ -45,7 +45,7 @@ header {
                 &:active, &:focus {
                     text-decoration: none;
                     color: #fff;
-                    
+
                     small {
                         color: rgba(255, 255, 255, 0.5);
                     }
@@ -139,4 +139,135 @@ header {
             margin-bottom: 20px;
         }
     }
+}
+
+#authentication {
+    display: none;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.75);
+    border-top: 2px solid rgba(0, 118, 176, 0.6);
+    border-bottom: 1px solid #ddd;
+
+    .greetings-box {
+        padding-top: 10px;
+        color: #777;
+        font-weight: 900;
+        line-height: 32px;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 14px;
+
+        @media(min-width: 768px) {
+            min-width: 365px;
+        }
+
+        a {
+            color: #777;
+
+            &:hover, &:focus, &:active {
+                text-decoration: none;
+            }
+
+            .greetings {
+                display: inline-block;
+                padding-top: 11px;
+
+                @media(min-width: 768px) {
+                    padding-top: 4px;
+                }
+            }
+
+            .greetings-face {
+                display: inline-block;
+                float: left;
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+                margin-right: 10px;
+                background: #ddd url("../img/logo_compact_light.png") no-repeat center center;
+                background-size: cover;
+            }
+
+            .greetings-username {
+                color: #333;
+            }
+
+            small {
+                color: #aaa;
+                font-weight: 400;
+                display: block;
+                word-wrap: normal;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .auth-providers {
+        padding: 10px 0 8px 0;
+
+        .auth-label {
+            color: #aaa;
+            font-weight: 400;
+            line-height: 30px;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding-right: 5px;
+        }
+
+        .auth-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+            margin: 0 2px;
+            //border: 2px solid #fff;
+            //background: #fff;
+            border: 0 none;
+            font-size: 16px;
+            line-height: 32px;
+            transition: 0.3s all;
+            -webkit-transition: 0.3s all;
+
+            i {
+                color: #fff;
+                position: relative;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.facebook {
+                background: #3b5998;
+
+                i {
+                    left: -1px;
+                }
+
+                &:hover {
+                    background: darken(#3b5998, 10%);
+                }
+            }
+
+            &.twitter {
+                background: #55acee;
+
+                &:hover {
+                    background: darken(#55acee, 10%);
+                }
+            }
+
+            &.logout {
+                background: #db0011;
+
+                i {
+                    top: -1px;
+                }
+
+                &:hover {
+                    background: darken(#db0011, 10%);
+                }
+            }
+        }
+    }
+
 }
