@@ -4,18 +4,31 @@
     moment.locale('pl');
 
     angular
-        .module('maziaj', ['ngRoute'])
+        .module('maziaj', ['ngRoute', 'satellizer', 'pw.canvas-painter'])
         .constant('MAZIAJ_CONFIG', {
             apiConfig: {
                 secure: false,
                 host: 'api-maziaj.herokuapp.com',
                 port: null
             }
+        }).config(function($authProvider) {
+          $authProvider.facebook({
+            clientId: '1653947051521674'
+          });
+          //$authProvider.google({
+          //    clientId: 'Google Client ID'
+          //});
         }).config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.
             when('/', {
                 templateUrl: 'partials/story-list.html'
+            }).
+            when('/moj-profil', {
+                templateUrl: 'partials/profile.html'
+            }).
+            when('/gra', {
+                templateUrl: 'partials/gameplay.html'
             }).
             when('/co-to', {
                 templateUrl: 'partials/about.html'
@@ -99,18 +112,36 @@
                 method: 'PUT',
                 url: _getApiUrl('/stories/' + storyId + '/like')
             })
-                .success(function (data, status, headers, config) {
-                })
-                .error(function (data, status, headers, config) {
-                });
+            .success(function (data, status, headers, config) {
+            })
+            .error(function (data, status, headers, config) {
+            });
         }
     }
 
     /* CONTROLLERS */
 
     angular
-        .module('maziaj')
-        .controller('StoryListController', StoryListController);
+    .module('maziaj')
+    .controller('PlayerBarController', PlayerBarController);
+
+    PlayerBarController.$inject = ['$scope', '$log', '$auth'];
+
+    function PlayerBarController($scope, $log, $auth) {
+        $scope.authenticated = false;
+
+        $scope.authenticate = function(provider) {
+            $auth.authenticate(provider);
+        };
+
+        $scope.isAuthenticated = function() {
+             return $auth.isAuthenticated();
+        };
+    }
+
+    angular
+    .module('maziaj')
+    .controller('StoryListController', StoryListController);
 
     StoryListController.$inject = ['$scope', '$log', 'StoryService'];
 
