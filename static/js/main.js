@@ -123,6 +123,29 @@
 
     angular
     .module('maziaj')
+    .controller('GameplayController', GameplayController);
+
+    GameplayController.$inject = ['$scope', '$log'];
+
+    function GameplayController($scope, $log) {
+        $scope.editor = {
+            palette: ['#000000', '#666666', '#999999', '#CCCCCC', '#EEEEEE',
+                      '#B21F35', '#D82735', '#FF7435', '#FFCB35', '#FFF235',
+                      '#00753A', '#009E47', '#16DD36', '#0052A5', '#0079E7',
+                      '#06A9FC', '#681E7E', '#7D3CB5', '#BD7AF6'],
+            version: 1,
+            color: '#000000',
+            brush: 10,
+            opacity: 1.0
+        };
+
+        $scope.undo = function() {
+            $scope.editor.version = $scope.editor.version - 1;
+        }
+    }
+
+    angular
+    .module('maziaj')
     .controller('PlayerBarController', PlayerBarController);
 
     PlayerBarController.$inject = ['$scope', '$log', '$auth'];
