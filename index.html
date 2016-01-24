@@ -94,14 +94,14 @@
                             <small class="hidden-xs">Zaloguj się i zapisuj swoje ulubione historyjki!</small>
                         </a>
                     </div>
-                    <div class="auth-providers pull-right" data-ng-show="!authenticated" data-ng-cloak>
+                    <div class="auth-providers pull-right" ng-if="!isAuthenticated()" data-ng-cloak>
                         <span class="auth-label hidden-xs">Zaloguj się przez</span>
-                        <button class="auth-btn facebook" data-ng-click="authenticate('facebook')"><i class="fa fa-facebook"></i></a>
+                        <button class="auth-btn facebook" data-ng-click="authenticate('facebook')"><i class="fa fa-facebook"></i></button>
                         <!--<button class="auth-btn twitter"><i class="fa fa-twitter"></i></a>-->
                     </div>
-                    <div class="auth-providers pull-right" data-ng-show="authenticated" data-ng-cloak>
+                    <div class="auth-providers pull-right" ng-if="isAuthenticated()" data-ng-cloak>
                         <span class="auth-label hidden-xs">Wyloguj</span>
-                        <button class="auth-btn logout"><i class="fa fa-power-off"></i></a>
+                        <button ng-click="logout()" class="auth-btn logout"><i class="fa fa-power-off"></i></button>
                     </div>
                 </div>
             </div>

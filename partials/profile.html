@@ -1,11 +1,11 @@
-<section id="profile" data-ng-controller="StoryDetailsController">
+<section id="profile" data-ng-controller="ProfileCtrl">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="profile-face"></div>
+                <div class="profile-face" style="background-image: url('{{ user.picture }}')"></div>
                 <h1 class="text-center section-header" style="margin-top: 0;">
                     <small>Siemanko</small>
-                    Mietek Szcześniak
+                    {{ user.displayName }}
                 </h1>
             </div>
         </div>

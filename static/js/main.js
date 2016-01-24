@@ -8,17 +8,15 @@
         .constant('MAZIAJ_CONFIG', {
             apiConfig: {
                 secure: false,
-                host: 'api-maziaj.herokuapp.com',
+                host: 'localhost:8080',
                 port: null
             }
-        }).config(function($authProvider) {
-          $authProvider.facebook({
-            clientId: '1653947051521674'
-          });
-          //$authProvider.google({
-          //    clientId: 'Google Client ID'
-          //});
-        }).config(['$routeProvider',
+        }).config(function ($authProvider) {
+        $authProvider.facebook({
+            clientId: '732141203512408',
+            url: 'http://localhost:8080/auth/facebook'
+        });
+    }).config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.
             when('/', {
@@ -43,6 +41,20 @@
     ]);
 
     /* SERVICES */
+
+    angular
+        .module('maziaj')
+        .factory('AccountService', AccountService);
+
+    AccountService.$inject = ['$http', 'MAZIAJ_CONFIG'];
+
+    function AccountService($http) {
+        return {
+            getProfile: function () {
+                return $http.get((MAZIAJ_CONFIG.apiConfig.secure ? 'https' : 'http') + "://" + MAZIAJ_CONFIG.apiConfig.host + '/profile');
+            }
+        };
+    }
 
     angular
         .module('maziaj')
@@ -112,59 +124,88 @@
                 method: 'PUT',
                 url: _getApiUrl('/stories/' + storyId + '/like')
             })
-            .success(function (data, status, headers, config) {
-            })
-            .error(function (data, status, headers, config) {
-            });
+                .success(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
+                });
         }
     }
 
     /* CONTROLLERS */
 
     angular
-    .module('maziaj')
-    .controller('GameplayController', GameplayController);
+        .module('maziaj')
+        .controller('ProfileCtrl', function ($scope, $auth, Account) {
+
+            /**
+             * Get user's profile information.
+             */
+                //$scope.getProfile = function () {
+            Account.getProfile()
+                .success(function (data) {
+                    $scope.user = data;
+                })
+                .error(function (error) {
+                    console.log({
+                        content: error.message,
+                        animation: 'fadeZoomFadeDown',
+                        type: 'material',
+                        duration: 3
+                    });
+                });
+            //};
+        });
+
+    angular
+        .module('maziaj')
+        .controller('GameplayController', GameplayController);
 
     GameplayController.$inject = ['$scope', '$log'];
 
     function GameplayController($scope, $log) {
         $scope.editor = {
             palette: ['#000000', '#666666', '#999999', '#CCCCCC', '#EEEEEE',
-                      '#B21F35', '#D82735', '#FF7435', '#FFCB35', '#FFF235',
-                      '#00753A', '#009E47', '#16DD36', '#0052A5', '#0079E7',
-                      '#06A9FC', '#681E7E', '#7D3CB5', '#BD7AF6'],
+                '#B21F35', '#D82735', '#FF7435', '#FFCB35', '#FFF235',
+                '#00753A', '#009E47', '#16DD36', '#0052A5', '#0079E7',
+                '#06A9FC', '#681E7E', '#7D3CB5', '#BD7AF6'],
             version: 1,
             color: '#000000',
             brush: 10,
             opacity: 1.0
         };
 
-        $scope.undo = function() {
+        $scope.undo = function () {
             $scope.editor.version = $scope.editor.version - 1;
         }
     }
 
     angular
-    .module('maziaj')
-    .controller('PlayerBarController', PlayerBarController);
+        .module('maziaj')
+        .controller('PlayerBarController', PlayerBarController);
 
-    PlayerBarController.$inject = ['$scope', '$log', '$auth'];
+    PlayerBarController.$inject = ['$scope', '$auth'];
 
-    function PlayerBarController($scope, $log, $auth) {
-        $scope.authenticated = false;
-
-        $scope.authenticate = function(provider) {
+    function PlayerBarController($scope, $auth) {
+        $scope.authenticate = function (provider) {
             $auth.authenticate(provider);
         };
 
-        $scope.isAuthenticated = function() {
-             return $auth.isAuthenticated();
+        $scope.isAuthenticated = function () {
+            return $auth.isAuthenticated();
         };
+
+        $scope.logout = function () {
+            if (!$auth.isAuthenticated()) {
+                return;
+            }
+            $auth.logout();
+        };
+
     }
 
     angular
-    .module('maziaj')
-    .controller('StoryListController', StoryListController);
+        .module('maziaj')
+        .controller('StoryListController', StoryListController);
 
     StoryListController.$inject = ['$scope', '$log', 'StoryService'];
 
