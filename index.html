@@ -80,7 +80,7 @@
         </nav>
     </header>
 
-    <div id="authentication" data-ng-init="authenticated=false; username='Mietek'" data-ng-click="authenticated=!authenticated">
+    <div id="authentication" data-ng-controller="PlayerBarController as player">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -94,14 +94,14 @@
                             <small class="hidden-xs">Zaloguj się i zapisuj swoje ulubione historyjki!</small>
                         </a>
                     </div>
-                    <div class="auth-providers pull-right" data-ng-show="!authenticated" data-ng-cloak>
+                    <div class="auth-providers pull-right" ng-if="!isAuthenticated()" data-ng-cloak>
                         <span class="auth-label hidden-xs">Zaloguj się przez</span>
-                        <button class="auth-btn facebook"><i class="fa fa-facebook"></i></a>
-                        <button class="auth-btn twitter"><i class="fa fa-twitter"></i></a>
+                        <button class="auth-btn facebook" data-ng-click="authenticate('facebook')"><i class="fa fa-facebook"></i></button>
+                        <!--<button class="auth-btn twitter"><i class="fa fa-twitter"></i></a>-->
                     </div>
-                    <div class="auth-providers pull-right" data-ng-show="authenticated" data-ng-cloak>
+                    <div class="auth-providers pull-right" ng-if="isAuthenticated()" data-ng-cloak>
                         <span class="auth-label hidden-xs">Wyloguj</span>
-                        <button class="auth-btn logout"><i class="fa fa-power-off"></i></a>
+                        <button ng-click="logout()" class="auth-btn logout"><i class="fa fa-power-off"></i></button>
                     </div>
                 </div>
             </div>
@@ -125,6 +125,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.min.js"></script>
+<!--[if lte IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
+<![endif]-->
+<script src="https://cdn.jsdelivr.net/satellizer/0.13.4/satellizer.min.js"></script>
+<script src="static/js/angular-canvas-painter.min.js"></script>
 <script src="static/js/main.js"></script>
 </body>
 

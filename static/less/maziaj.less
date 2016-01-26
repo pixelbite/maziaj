@@ -11,6 +11,41 @@ h1, h2, h3 {
 
     &.section-header {
         padding: 20px 0;
+
+        small { display: block; }
+    }
+}
+
+.nav-pills {
+    text-align: center;
+
+    li {
+        display: inline-block;
+        float: none;
+
+        a {
+            text-transform: uppercase;
+            font-weight: 400;
+            border: 2px solid transparent;
+
+            &:hover {
+                background: transparent;
+                border-color: @maziaj-primary-blue;
+            }
+        }
+
+        &.active {
+            a {
+                background: @maziaj-secondary-red;
+                border-color: @maziaj-secondary-red;
+                font-weight: 300;
+
+                &:hover, &:focus {
+                    background: darken(@maziaj-secondary-red, 10%);
+                    border-color: darken(@maziaj-secondary-red, 10%);
+                }
+            }
+        }
     }
 }
 
@@ -18,3 +53,5 @@ h1, h2, h3 {
 @import "components/footer.less";
 
 @import "story-list.less";
+@import "profile.less";
+@import "gameplay.less";

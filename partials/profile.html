@@ -1,0 +1,19 @@
+<section id="profile" data-ng-controller="ProfileCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="profile-face" style="background-image: url('{{ user.picture }}')"></div>
+                <h1 class="text-center section-header" style="margin-top: 0;">
+                    <small>Siemanko</small>
+                    {{ user.displayName }}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ul class="nav nav-pills">
+          <li role="presentation" class="active"><a href="#/moj-profil/historyjki">Moje historyjki</a></li>
+          <li role="presentation"><a href="#/moj-profil/polubione">Polubione historyjki</a></li>
+        </ul>
+    </div>
+</section>
