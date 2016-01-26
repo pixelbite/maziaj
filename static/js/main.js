@@ -48,11 +48,27 @@
 
     AccountService.$inject = ['$http', 'MAZIAJ_CONFIG'];
 
-    function AccountService($http) {
+    function AccountService($http, MAZIAJ_CONFIG) {
         return {
-            getProfile: function () {
-                return $http.get((MAZIAJ_CONFIG.apiConfig.secure ? 'https' : 'http') + "://" + MAZIAJ_CONFIG.apiConfig.host + '/profile');
+            data: {},
+            actions: {
+                getProfile: getProfile
             }
+        };
+
+        function _getApiUrl(endpoint) {
+            return (MAZIAJ_CONFIG.apiConfig.secure ? 'https' : 'http') + "://" + MAZIAJ_CONFIG.apiConfig.host + endpoint;
+        }
+
+        function getProfile() {
+            return $http({
+                method: 'GET',
+                url: _getApiUrl('/profile')
+            })
+            .success(function (data, status, headers, config) {
+            })
+            .error(function (data, status, headers, config) {
+            });
         };
     }
 
@@ -135,26 +151,24 @@
 
     angular
         .module('maziaj')
-        .controller('ProfileCtrl', function ($scope, $auth, Account) {
+        .controller('ProfileController', ProfileController);
 
-            /**
-             * Get user's profile information.
-             */
-                //$scope.getProfile = function () {
-            Account.getProfile()
-                .success(function (data) {
-                    $scope.user = data;
-                })
-                .error(function (error) {
-                    console.log({
-                        content: error.message,
-                        animation: 'fadeZoomFadeDown',
-                        type: 'material',
-                        duration: 3
-                    });
+    ProfileController.$inject = ['$scope', '$log', 'AccountService'];
+
+    function ProfileController($scope, $log, AccountService) {
+        AccountService.actions.getProfile()
+            .success(function (data) {
+                $scope.profile = data;
+            })
+            .error(function (error) {
+                $log.error({
+                    content: error.message,
+                    animation: 'fadeZoomFadeDown',
+                    type: 'material',
+                    duration: 3
                 });
-            //};
-        });
+            });
+    }
 
     angular
         .module('maziaj')
@@ -183,11 +197,28 @@
         .module('maziaj')
         .controller('PlayerBarController', PlayerBarController);
 
-    PlayerBarController.$inject = ['$scope', '$auth'];
+    PlayerBarController.$inject = ['$scope', '$auth', 'AccountService'];
 
-    function PlayerBarController($scope, $auth) {
+    function PlayerBarController($scope, $auth, AccountService) {
         $scope.authenticate = function (provider) {
-            $auth.authenticate(provider);
+            $auth.authenticate(provider)
+            .then(function(response) {
+                AccountService.actions.getProfile()
+                    .success(function (data) {
+                        $scope.profile = data;
+                        $log.info(data);
+                    })
+                    .error(function (error) {
+                        $log.error({
+                            content: error.message,
+                            animation: 'fadeZoomFadeDown',
+                            type: 'material',
+                            duration: 3
+                        });
+                    });
+            }).catch(function(response) {
+                $log.error(response);
+            });
         };
 
         $scope.isAuthenticated = function () {

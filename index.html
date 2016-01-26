@@ -85,11 +85,19 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="greetings-box pull-left" data-ng-cloak>
-                        <a href="#/moj-profil">
+                        <span ng-if="!isAuthenticated()">
                             <span class="greetings-face"></span>
                             <span class="greetings">
                                 Siemasz,
-                                <span class="greetings-username" data-ng-show="!authenticated">gościu</span><span class="greetings-username" data-ng-show="authenticated">{{username}}</span>!
+                                <span class="greetings-username">gościu</span>!
+                            </span>
+                            <small class="hidden-xs">Zaloguj się i zapisuj swoje ulubione historyjki!</small>
+                        </span>
+                        <a href="#/moj-profil" ng-if="isAuthenticated()">
+                            <span class="greetings-face" style="background-image: url({{profile.picture}});"></span>
+                            <span class="greetings">
+                                Siemasz,
+                                <span class="greetings-username" data-ng-show="authenticated">{{profile.name}}</span>!
                             </span>
                             <small class="hidden-xs">Zaloguj się i zapisuj swoje ulubione historyjki!</small>
                         </a>
