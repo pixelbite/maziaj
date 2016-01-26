@@ -8,13 +8,13 @@
         .constant('MAZIAJ_CONFIG', {
             apiConfig: {
                 secure: false,
-                host: 'localhost:8080',
+                host: 'api-maziaj.herokuapp.com',
                 port: null
             }
         }).config(function ($authProvider) {
         $authProvider.facebook({
-            clientId: '732141203512408',
-            url: 'http://localhost:8080/auth/facebook'
+            clientId: '1653947051521674',
+            url: 'http://api-maziaj.herokuapp.com/auth/facebook'
         });
     }).config(['$routeProvider',
         function ($routeProvider) {

@@ -180,6 +180,7 @@ header nav a.logotype {
   margin-bottom: 20px;
 }
 #authentication {
+  display: none;
   width: 100%;
   background: rgba(255, 255, 255, 0.75);
   border-top: 2px solid rgba(0, 118, 176, 0.6);
