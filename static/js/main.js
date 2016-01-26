@@ -46,9 +46,9 @@
         .module('maziaj')
         .factory('AccountService', AccountService);
 
-    AccountService.$inject = ['$http', 'MAZIAJ_CONFIG'];
+    AccountService.$inject = ['$auth'];
 
-    function AccountService($http, MAZIAJ_CONFIG) {
+    function AccountService($auth) {
         return {
             data: {},
             actions: {
@@ -56,19 +56,8 @@
             }
         };
 
-        function _getApiUrl(endpoint) {
-            return (MAZIAJ_CONFIG.apiConfig.secure ? 'https' : 'http') + "://" + MAZIAJ_CONFIG.apiConfig.host + endpoint;
-        }
-
         function getProfile() {
-            return $http({
-                method: 'GET',
-                url: _getApiUrl('/profile')
-            })
-            .success(function (data, status, headers, config) {
-            })
-            .error(function (data, status, headers, config) {
-            });
+            return $auth.getPayload();
         };
     }
 
@@ -156,18 +145,7 @@
     ProfileController.$inject = ['$scope', '$log', 'AccountService'];
 
     function ProfileController($scope, $log, AccountService) {
-        AccountService.actions.getProfile()
-            .success(function (data) {
-                $scope.profile = data;
-            })
-            .error(function (error) {
-                $log.error({
-                    content: error.message,
-                    animation: 'fadeZoomFadeDown',
-                    type: 'material',
-                    duration: 3
-                });
-            });
+        $scope.profile = AccountService.actions.getProfile();
     }
 
     angular
@@ -203,18 +181,7 @@
         $scope.authenticate = function (provider) {
             $auth.authenticate(provider)
             .then(function(response) {
-                AccountService.actions.getProfile()
-                    .success(function (data) {
-                        $scope.profile = data;
-                    })
-                    .error(function (error) {
-                        $log.error({
-                            content: error.message,
-                            animation: 'fadeZoomFadeDown',
-                            type: 'material',
-                            duration: 3
-                        });
-                    });
+                $scope.profile = AccountService.actions.getProfile();
             }).catch(function(response) {
                 $log.error(response);
             });
@@ -232,18 +199,7 @@
         };
 
         if ($scope.isAuthenticated()) {
-            AccountService.actions.getProfile()
-                .success(function (data) {
-                    $scope.profile = data;
-                })
-                .error(function (error) {
-                    $log.error({
-                        content: error.message,
-                        animation: 'fadeZoomFadeDown',
-                        type: 'material',
-                        duration: 3
-                    });
-                });
+            $scope.profile = AccountService.actions.getProfile();
         }
 
     }
