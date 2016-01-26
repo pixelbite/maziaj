@@ -206,7 +206,6 @@
                 AccountService.actions.getProfile()
                     .success(function (data) {
                         $scope.profile = data;
-                        $log.info(data);
                     })
                     .error(function (error) {
                         $log.error({
@@ -231,6 +230,21 @@
             }
             $auth.logout();
         };
+
+        if (!$scope.isAuthenticated()) {
+            AccountService.actions.getProfile()
+                .success(function (data) {
+                    $scope.profile = data;
+                })
+                .error(function (error) {
+                    $log.error({
+                        content: error.message,
+                        animation: 'fadeZoomFadeDown',
+                        type: 'material',
+                        duration: 3
+                    });
+                });
+        }
 
     }
 
