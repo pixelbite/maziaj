@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="greetings-box pull-left" data-ng-cloak>
-                        <span ng-if="!isAuthenticated()">
+                        <span class="invitation" ng-if="!isAuthenticated()">
                             <span class="greetings-face"></span>
                             <span class="greetings">
                                 Siemasz,
@@ -93,7 +93,7 @@
                             </span>
                             <small class="hidden-xs">Zaloguj się i zapisuj swoje ulubione historyjki!</small>
                         </span>
-                        <a href="#/moj-profil" ng-if="isAuthenticated()">
+                        <a class="invitation" href="#/moj-profil" ng-if="isAuthenticated()">
                             <span class="greetings-face" style="background-image: url({{profile.picture}});"></span>
                             <span class="greetings">
                                 Siemasz,

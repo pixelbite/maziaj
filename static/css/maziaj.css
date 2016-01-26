@@ -200,24 +200,24 @@ header nav a.logotype {
     min-width: 365px;
   }
 }
-#authentication .greetings-box a {
+#authentication .greetings-box .invitation {
   color: #777;
 }
-#authentication .greetings-box a:hover,
-#authentication .greetings-box a:focus,
-#authentication .greetings-box a:active {
+#authentication .greetings-box .invitation:hover,
+#authentication .greetings-box .invitation:focus,
+#authentication .greetings-box .invitation:active {
   text-decoration: none;
 }
-#authentication .greetings-box a .greetings {
+#authentication .greetings-box .invitation .greetings {
   display: inline-block;
   padding-top: 11px;
 }
 @media (min-width: 768px) {
-  #authentication .greetings-box a .greetings {
+  #authentication .greetings-box .invitation .greetings {
     padding-top: 4px;
   }
 }
-#authentication .greetings-box a .greetings-face {
+#authentication .greetings-box .invitation .greetings-face {
   display: inline-block;
   float: left;
   width: 32px;
@@ -227,10 +227,10 @@ header nav a.logotype {
   background: #ddd url("../img/logo_compact_light.png") no-repeat center center;
   background-size: cover;
 }
-#authentication .greetings-box a .greetings-username {
+#authentication .greetings-box .invitation .greetings-username {
   color: #333;
 }
-#authentication .greetings-box a small {
+#authentication .greetings-box .invitation small {
   color: #aaa;
   font-weight: 400;
   display: block;
