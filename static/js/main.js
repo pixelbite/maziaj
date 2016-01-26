@@ -231,7 +231,7 @@
             $auth.logout();
         };
 
-        if (!$scope.isAuthenticated()) {
+        if ($scope.isAuthenticated()) {
             AccountService.actions.getProfile()
                 .success(function (data) {
                     $scope.profile = data;
